@@ -2,14 +2,14 @@
 
 ### Initialization
 
-In Python, collections of `(key, value)` pairs with unique keys are known as a dictionary. It is a built-in type called [`dict`](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict) and is declared either of the following ways (although the former is much more prominent)
+In Python, a collection of `(key, value)` pairs with unique keys are known as a dictionary. It is a built-in type called [`dict`](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict) and is declared either of the following ways (although the first is far more prominent):
 
 ```python
 aliases = {}
 aliases = dict()
 ```
 
-This same structure exists within Go as a `map`. But since Go is a typed language, maps are likewise typed.
+This same structure exists within Go as a `map`. But since Go is a typed language, maps have types for both keys and values:
 
 ```go
 var aliases map[string]string
@@ -66,6 +66,7 @@ duplicate key "Green Lantern" in map literal
 ```
 
 In contrast, Python allows duplicate keys during initialization, and will use the last given duplicate as the key's value:
+
 ```python
 aliases = {
     "Green Lantern": "John Stewart",
@@ -85,7 +86,7 @@ aliases[dict()] = 'value'
 TypeError: unhashable type: 'dict'
 ```
 
-There are also illegal key types in Go, but doing so will generate a compile-time error:
+There are also illegal key types in Go, but using them will generate a compile-time error:
 
 ```go
 var nested map[map[string]string]string
@@ -220,9 +221,10 @@ func (c Counter) Keys() (keys []string) {
 }
 ```
 
-However, since Go lacks generics, these methods must be declared for any desired type.
+However, since Go lacks generics, these methods must be declared for each custom type.
 
 From [Golang for Pythonistas](https://github.com/aodin/golang-for-pythonistas)
 
 Happy Hacking!
+
 aodin, 2015
