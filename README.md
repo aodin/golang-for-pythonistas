@@ -1,6 +1,6 @@
 # Golang for Pythonistas
 
-Advanced topics for [Python programmers](https://www.python.org/) looking to use [Go](http://golang.org/).
+Advanced topics for [Python](https://www.python.org/) programmers looking to use [Go](http://golang.org/).
 
 
 ### FAQ
@@ -20,12 +20,22 @@ You have. There are multiple introductions to Go for Python programmers. However
 
 *What's your background?*
 
-I have being writing Python since 2008 and Go since 2011. I mainly write web services, which I formerly did in Python and now do in Go. I still use python for scripting, data science, and data munging.
+I have being writing Python since 2008 and Go since 2011. I mainly write web services, formerly in Python and now in Go. I still use Python for scripting and data science - especially munging.
 
 
 ### Topics
 
 1. [Maps](golang-maps-for-pythonistas.md)
+
+Upcoming:
+
+1. Strings
+1. Errors
+1. Interfaces
+1. Embedding
+1. Concurrency
+1. Packages
+1. Deployment
 
 
 Happy hacking!

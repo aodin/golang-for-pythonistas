@@ -15,7 +15,7 @@ This same structure exists within Go as a `map`. But since Go is a typed languag
 var aliases map[string]string
 ```
 
-However, attempting to insert directly to this variable will result in a runtime panic:
+However, attempting to insert into this variable will result in a runtime panic:
 
 ```go
 aliases["Batman"] = "Bruce Wayne"
@@ -30,14 +30,15 @@ It must first be made with the built-in function `make`:
 aliases = make(map[string]string)
 ```
 
-This declare and make syntax is clunky and map initialization is better done with [short variable declarations](https://golang.org/ref/spec#Short_variable_declarations) when possible by using either of the following:
+This declare and make syntax is clunky and map initialization is better done with [short variable declarations](https://golang.org/ref/spec#Short_variable_declarations) - when possible - by using either of the following:
 
 ```go
 aliases := map[string]string{}
 aliases := make(map[string]string)
 ```
 
-Failure to initialize the map using the short syntax is a compile-time error:
+As type is inferred, it is impossible to use an un-made map using the short form. Any syntax mistakes made during declaration would become compile-time errors:
+
 ```go
 aliases := map[string]string
 ```
@@ -53,7 +54,7 @@ aliases := map[string]string{
 }
 ```
 
-Duplicate keys given during initialization are a compile-time error:
+Declaring duplicate keys during initialization are a compile-time error:
 
 ```go
 aliases := map[string]string{
