@@ -9,7 +9,7 @@ aliases = {}
 aliases = dict()
 ```
 
-This same structure exists within Go as a `map`. But since Go is a typed language, maps have types for both keys and values:
+This same structure exists within Go as a [`map`](https://golang.org/ref/spec#Map_types). But since Go is a typed language, maps have types for both keys and values:
 
 ```go
 var aliases map[string]string
@@ -137,7 +137,7 @@ delete(aliases, "Green Lantern")
 Existence is checked in Python using the `in` operator:
 
 ```python
-print("Green Arrow" in aliases) // False
+print("Green Arrow" in aliases) # False
 ```
 
 There is no existence function, operator, or method in Go. Checking existence in Go is further complicated by non-existent keys returning the zero values of their value types:
