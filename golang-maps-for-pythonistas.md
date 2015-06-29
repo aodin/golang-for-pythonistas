@@ -2,7 +2,7 @@
 
 ### Initialization
 
-In Python, a collection of `(key, value)` pairs with unique keys are known as a dictionary. It is a built-in type called [`dict`](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict) and is declared either of the following ways (although the first is far more prominent):
+In Python, a collection of `(key, value)` pairs with unique keys is known as a dictionary. It is a built-in type called [`dict`](https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict) and is declared either of the following ways (although the first is far more prominent):
 
 ```python
 aliases = {}
@@ -15,7 +15,7 @@ This same structure exists within Go as a `map`. But since Go is a typed languag
 var aliases map[string]string
 ```
 
-However, attempting to insert into this variable will result in a runtime panic:
+However, attempting to insert into this variable will cause a runtime panic:
 
 ```go
 aliases["Batman"] = "Bruce Wayne"
@@ -24,20 +24,20 @@ aliases["Batman"] = "Bruce Wayne"
 panic: assignment to entry in nil map
 ```
 
-It must first be made with the built-in function `make`:
+Before use, it must be "made" with the built-in function `make`:
 
 ```go
 aliases = make(map[string]string)
 ```
 
-This declare and make syntax is clunky and map initialization is better done with [short variable declarations](https://golang.org/ref/spec#Short_variable_declarations) - when possible - by using either of the following:
+This declare and make syntax is clunky. Map initialization is better done with [short variable declarations](https://golang.org/ref/spec#Short_variable_declarations) - if possible - by using either of the following:
 
 ```go
 aliases := map[string]string{}
 aliases := make(map[string]string)
 ```
 
-As type is inferred, it is impossible to use an un-made map using the short form. Any syntax mistakes made during declaration would become compile-time errors:
+Since type is inferred in the short form, it is impossible to use an un-made map. Any syntax mistakes made during declaration become compile-time errors:
 
 ```go
 aliases := map[string]string
@@ -54,7 +54,7 @@ aliases := map[string]string{
 }
 ```
 
-Declaring duplicate keys during initialization are a compile-time error:
+Declaring duplicate keys during initialization is a compile-time error:
 
 ```go
 aliases := map[string]string{
@@ -78,7 +78,7 @@ aliases = {
 {'Green Lantern': 'Hal Jordan'}
 ```
 
-Although Python dictionaries are untyped - not all types are valid keys. Only the Python types that are hashable can be used as keys, which excludes `list`, `set`, and other dictionaries. Using these types as keys will generate a runtime `TypeError` exception:
+Although Python dictionaries are untyped - not all types are valid keys. Only hashable Python types can be used as keys, which excludes `list`, `set`, and other dictionaries. Using these types as keys will generate a runtime `TypeError` exception:
 
 ```python
 aliases[dict()] = 'value'
@@ -96,7 +96,7 @@ var nested map[map[string]string]string
 invalid map key type map[string]string
 ```
 
-In Python, [`frozenset`](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuples), and custom classes can be used to provided multi-dimensional keys. In Go, this can also done with using custom `struct` types or using arrays - which are hashable - as opposed to slices - which are not.
+In Python, [`frozenset`](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuples), and custom classes can be used to provided multi-dimensional keys. In Go, this can also done with using custom `struct` types or using [arrays](https://golang.org/ref/spec#Array_types) - which are hashable - as opposed to [slices](https://golang.org/ref/spec#Slice_types) - which are not.
 
 ```go
 matrix := map[[2]int]string{
@@ -113,8 +113,10 @@ matrix := map[[]int]string{
 invalid map key type []int
 ```
 
--- TODO python can build dicts from iterables - discuss?
--- TODO the extra caveats of interface{} as a key, e.g. type equality
+*TODO*
+
+- Python can build dictionaries from iterables - Go equivalent?
+- Caveats of interface{} as a key in Go - especially vis-à-vis type equality
 
 ### Usage
 
@@ -153,11 +155,19 @@ age, exists := ages["Bill"]
 fmt.Println(age, exists) // 0, false
 ```
 
+If the first variable is irrelevant, it can be ignored using the [blank identifier `_`](https://golang.org/ref/spec#Blank_identifier):
+
+```go
+ages := map[string]int{}
+_, exists := ages["Bill"]
+fmt.Println(exists) // false
+```
+
 The benefit of Go maps returning zero values for non-existent keys is that many values can be modified without initialization, for example:
 
 ```go
 villians := map[string][]string{}
-append(villians["Batman"], "The Joker", "Two-Face", "Ra's al Ghul")
+villians["Batman"] = append(villians["Batman"], "The Joker", "Ra's al Ghul")
 ```
 
 The equivalent behavior in Python would require the usage of the `collections` module's [`defaultdict`](https://docs.python.org/3/library/collections.html#collections.defaultdict):
@@ -165,7 +175,7 @@ The equivalent behavior in Python would require the usage of the `collections` m
 ```python
 from collections import defaultdict
 villians = defaultdict(list)
-villians["Batman"].extend(["The Joker", "Two-Face", "Ra's al Ghul"])
+villians["Batman"].extend(["The Joker", "Ra's al Ghul"])
 ```
 
 ### Iteration
@@ -193,23 +203,23 @@ for key, value := range aliases {
 }
 ```
 
-Wheres Python requires usage of the [`items` method](https://docs.python.org/3/library/stdtypes.html#dict.items):
+Wheres Python requires usage of the [`items`](https://docs.python.org/3/library/stdtypes.html#dict.items) method:
 
 ```python
 for key, value in aliases.items():
     print(key, value)
 ```
 
-In the CPython implementation of Python, dictionary iteration can vary, but will remain consistent as long as the dictionary is not modified. https://docs.python.org/2/library/stdtypes.html#dict.items
+In the CPython implementation of Python, dictionary iteration can vary, but will remain consistent as long as the dictionary is not modified.<sup>[link](https://docs.python.org/2/library/stdtypes.html#dict.items)</sup> 
 
-Go does not guarantee iteration order, even between back-to-back iterations. http://golang.org/ref/spec#RangeClause
+Go does not guarantee iteration order, even between back-to-back iterations.<sup>[link](http://golang.org/ref/spec#RangeClause)</sup>
 
 
 ### Methods
 
 Python provides a number of methods for dictionaries, including the `keys` and `values` methods that return a dictionary's keys and values, respectively, as lists.
 
-Go maps have no additional methods, though the `keys` and `values` methods can be replicated by attaching them to custom types:
+Go maps have no built-in methods, though the `keys` and `values` methods can be replicated by attaching them to custom types:
 
 ```go
 type Counter map[string]int
