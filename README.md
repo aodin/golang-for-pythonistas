@@ -20,13 +20,14 @@ You have. There are multiple introductions to Go for Python programmers. However
 
 *What's your background?*
 
-I have being writing Python since 2008 and Go since 2011. I predominantly write web services, formerly in Python and now in Go. I still use Python for scripting and data science - especially munging.
+I have being writing Python since 2008 and Go since 2011. As of 2017, I am still writing web services in both Python and Go.
 
 
 ### Topics
 
-1. [Maps](golang-maps-for-pythonistas.md)
-1. [Errors](golang-errors-for-pythonistas.md)
+1. [Packages and Imports](packages-and-imports.md)
+1. [Errors](errors.md)
+1. [Maps](maps.md)
 
 Upcoming:
 
@@ -39,4 +40,4 @@ Upcoming:
 
 Happy hacking!
 
-aodin, 2015
+aodin, 2015-2017

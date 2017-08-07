@@ -96,13 +96,15 @@ var nested map[map[string]string]string
 invalid map key type map[string]string
 ```
 
-In Python, [`frozenset`](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuples), and custom classes can be used to provided multi-dimensional keys. In Go, this can also done with using custom `struct` types or using [arrays](https://golang.org/ref/spec#Array_types) - which are hashable - as opposed to [slices](https://golang.org/ref/spec#Slice_types) - which are not.
+In Python, [`frozenset`](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset), [`tuple`](https://docs.python.org/3/library/stdtypes.html#tuples), and custom classes can be used to provided multi-dimensional keys. In Go, this can also done with using custom `struct` types or using [arrays](https://golang.org/ref/spec#Array_types) - which are hashable.
 
 ```go
 matrix := map[[2]int]string{
     [2]int{1, 2}: "Battleship",
 }
 ```
+
+As opposed to [slices](https://golang.org/ref/spec#Slice_types) - which are not.
 
 ```go
 matrix := map[[]int]string{
@@ -178,6 +180,10 @@ villians = defaultdict(list)
 villians["Batman"].extend(["The Joker", "Ra's al Ghul"])
 ```
 
+*TODO*
+
+- https://groups.google.com/forum/#!topic/golang-nuts/4_pabWnsMp0
+
 ### Iteration
 
 Iterating over a dictionary in Python returns the key as the single iterable variable.
@@ -203,7 +209,7 @@ for key, value := range aliases {
 }
 ```
 
-Wheres Python requires usage of the [`items`](https://docs.python.org/3/library/stdtypes.html#dict.items) method:
+Whereas Python requires usage of the [`items`](https://docs.python.org/3/library/stdtypes.html#dict.items) method:
 
 ```python
 for key, value in aliases.items():
@@ -236,6 +242,6 @@ However, since Go lacks generics, these methods must be declared for each custom
 
 From [Golang for Pythonistas](https://github.com/aodin/golang-for-pythonistas)
 
-Happy Hacking!
+Happy hacking!
 
 aodin, 2015

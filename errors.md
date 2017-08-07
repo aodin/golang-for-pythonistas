@@ -138,7 +138,7 @@ There remains a significant use case for exceptions that Go's errors cannot hand
 
 Go's best answer to this question is a controversial one - `panic` and `recover`. They are both built-in functions, and they respectively provide a way to halt or regain program execution.
 
-They are used sparingly in the standard library for this purpose - immediately halting the program. Examples include: when a [bad base has been provided to `fmt`](https://github.com/golang/go/blob/release-branch.go1.4/src/fmt/format.go#L231):
+They are used sparingly in the Go standard library. Examples include: when a [bad base has been provided to `fmt`](https://github.com/golang/go/blob/release-branch.go1.4/src/fmt/format.go#L231):
 
 ```go
 panic("fmt: unknown base; can't happen")
@@ -172,6 +172,6 @@ To prevent this disaster, the programmer must either have an intimate  knowledge
 
 From [Golang for Pythonistas](https://github.com/aodin/golang-for-pythonistas)
 
-Happy Hacking!
+Happy hacking!
 
 aodin, 2015
